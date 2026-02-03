@@ -1,0 +1,20 @@
+# Environnement virtuel
+venv_rag/
+.venv/
+# Git
+.git/
+.gitignore
+# IDE
+.idea/
+# Python cache
+__pycache__/
+*.py[cod]
+*.pyo
+# ChromaDB local
+data/chroma_db/*
+# Fichiers sensibles
+api_keys.yml
+*.md
+.dockerignore
+Dockerfile
+docker-compose.yml

@@ -1,6 +1,5 @@
 # Environnement virtuel
 venv_rag/
-.venv/
 
 # Cles API
 api_keys.yml
