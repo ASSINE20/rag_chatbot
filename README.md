@@ -11,7 +11,8 @@ Un chatbot intelligent qui répond à vos questions en analysant vos documents P
 - ✅ Sélection du modèle GPT (gpt-5-mini, gpt-5.2, etc.)
 - ✅ Ajustement de la température (créativité)
 - ✅ Historique des conversations
-
+- ✅ Déploiement Docker
+- ✅ CI/CD avec GitHub Actions
 ---
 ## 🏗️ Architecture
 
@@ -56,22 +57,33 @@ rag_chatbot/
 │   └── handlers.py          # Handlers Streamlit
 ├── data/
 │   └── chroma_db/           # Base de données vectorielle
+├── .github/
+│   └── workflows/
+│       └── ci-cd.yml        # Pipeline CI/CD
 ├── app.py                   # Application principale
+├── Dockerfile               # Image Docker
+├── docker-compose.yml       # Orchestration Docker
+├── .dockerignore            # Fichiers exclus du build
+├── .gitignore               # Fichiers exclus de Git
 ├── api_keys.yml             # Clés API (non versionné)
-├── requirements.txt         # Dépendances
+├── requirements.txt         # Dépendances Python
 └── README.md
 ```
+
 ---
 
 ## 📦 Technologies Utilisées
 
-- **LangChain** - Framework pour applications LLM
-- **OpenAI GPT-5** - Modèle de langage
-- **ChromaDB** - Base de données vectorielle
-- **Streamlit** - Interface utilisateur
-- **PyMuPDF** - Lecture des fichiers PDF
-
----
+| Technologie | Usage |
+|-------------|-------|
+| **LangChain** | Framework pour applications LLM |
+| **OpenAI GPT-5** | Modèle de langage |
+| **ChromaDB** | Base de données vectorielle |
+| **Streamlit** | Interface utilisateur |
+| **PyMuPDF** | Lecture des fichiers PDF |
+| **Docker** | Conteneurisation |
+| **GitHub Actions** | CI/CD |
+| **GHCR** | Registry d'images Docker |
 ---
 ## 🚀 Installation
 
@@ -113,7 +125,42 @@ OPENAI_API_KEY: "sk-votre-cle-api-openai"
 ```bash
 streamlit run app.py
 ```
+### Utiliser l'image GHCR
+```bash
+docker pull ghcr.io/ASSINE20/rag_chatbot:latest
 
+docker run -p 8501:8501 -e OPENAI_API_KEY="sk-votre-cle" ghcr.io/ASSINE20/rag_chatbot:latest
+```
+
+L'application sera disponible sur `http://localhost:8501`
+
+## 🔄 CI/CD Pipeline
+
+Le projet utilise GitHub Actions pour l'intégration et le déploiement continus.
+
+### Pipeline automatique
+---
+```
+git push main
+      │
+      ▼
+┌─────────────┐
+│   BUILD     │ → Checkout, Setup Python, Install deps
+└─────────────┘
+      │
+      ▼
+┌─────────────┐
+│   TEST      │ → Exécution des tests
+└─────────────┘
+      │
+      ▼
+┌─────────────┐
+│   DOCKER    │ → Build image, Push to GHCR
+└─────────────┘
+      │
+      ▼
+📦 Image disponible sur ghcr.io
+```
 ---
 ## 🎮 Utilisation
 
