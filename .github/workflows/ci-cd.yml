@@ -62,12 +62,14 @@ jobs:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
           tags: |
             type=ref, event=branch
-            type=sha, prefix= latest
+            type=sha, prefix= sha-
+            type=raw, value=latest
 
       - name: Build and Push
         uses: docker/build-push-action@v5
         with:
           context: .
           push: ${{ github.event_name != 'pull_request' }}
-          tags: ${{ steps.meta.outputs.labels }}
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
 
