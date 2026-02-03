@@ -1,0 +1,21 @@
+# Environnement virtuel
+venv_rag/
+.venv/
+
+# Cles API
+api_keys.yml
+
+# Base de donnees ChromaDB
+data/chroma_db/
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+
+# IDE
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
